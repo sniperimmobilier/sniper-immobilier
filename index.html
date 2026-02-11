@@ -1,0 +1,66 @@
+On reste en bas de page.
+
+Content de te revoir ! Maintenant que tu as réglé ton problème de plein écran, voici le code complet et propre. Assure-toi de bien tout sélectionner, de la ligne 1 à la ligne 63.
+
+🛠️ LE PROGRAMME COMPLET (63 LIGNES)
+HTML
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sniper Immobilier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-4 font-sans">
+    
+    <div class="max-w-6xl mx-auto text-center py-10">
+        <h1 class="text-4xl font-extrabold text-green-500 mb-2">SNIPER IMMOBILIER</h1>
+        <p class="text-gray-400">Villas d'exception</p>
+    </div>
+
+    <div id="grid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+
+    <script>
+        async function fetchProperties() {
+            try {
+                const response = await fetch('https://api.airtable.com/v0/app101Rd6gKDfb4WT/Table%201', {
+                    headers: { 
+                        Authorization: 'Bearer patQB6cx7rAbbVIPa.e0334cde62143cd92a859c28393adca0c1caad61034b39df50aaf4031c104941' 
+                    }
+                });
+                const data = await response.json();
+                const grid = document.getElementById('grid');
+                
+                if (!data.records || data.records.length === 0) {
+                    grid.innerHTML = "<p class='col-span-full text-center text-gray-400'>Aucune villa disponible.</p>";
+                    return;
+                }
+
+                grid.innerHTML = data.records.map(record => {
+                    const f = record.fields;
+                    const photo = f.Photos && f.Photos[0] ? f.Photos[0].url : 'https://via.placeholder.com/400x300?text=Image+Indisponible';
+                    return `
+                        <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 hover:border-green-500 transition-all duration-300">
+                            <img src="${photo}" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <h2 class="text-2xl font-bold mb-1">${f.Nom || 'Villa'}</h2>
+                                <p class="text-green-400 text-xl font-bold mb-4">${f.Prix || 'Nous consulter'} €</p>
+                                <p class="text-gray-400 text-sm mb-6 h-12 overflow-hidden">${f.Description || ''}</p>
+                                <a href="https://wa.me/33634089609?text=Bonjour,%20je%20suis%20intéressé%20par%20l'annonce%20:%20${encodeURIComponent(f.Nom || 'Villa')}" 
+                                   target="_blank"
+                                   class="block bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-xl text-center transition-colors">
+                                   Contacter sur WhatsApp
+                                </a>
+                            </div>
+                        </div>`;
+                }).join('');
+            } catch (error) {
+                console.error("Erreur Airtable:", error);
+            }
+        }
+        fetchProperties();
+    </script>
+</body>
+</html>
