@@ -3,22 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sniper Immobilier | Luxe & Prestige</title>
+    <title>Sniper Immobilier | Investissement Diaspora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
         .font-luxury { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="bg-black text-white p-4 font-sans">
-    <div class="max-w-6xl mx-auto text-center py-20">
-        <h1 class="text-6xl md:text-8xl font-luxury font-extrabold gold-gradient mb-6 uppercase tracking-tighter text-center">SNIPER IMMOBILIER</h1>
-        <div class="h-1 w-32 bg-yellow-600 mx-auto mb-6"></div>
-        <p class="text-gray-500 tracking-[0.3em] uppercase text-[10px] font-semibold text-center italic">L'immobilier d'exception | Algérie & International</p>
-    </div>
-    <div id="grid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pb-24">
+<body>
+    <nav class="fixed w-full z-50 bg-black/95 border-b border-gray-900 px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-luxury font-bold gold-gradient tracking-tighter">SNIPER IMMOBILIER</div>
+        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-semibold text-gray-400">
+            <a href="#villas" class="hover:text-yellow-600 transition">Investir</a>
+            <a href="https://wa.me/33634089609" class="text-yellow-600 border border-yellow-900 px-4 py-1">Contact Direct</a>
         </div>
+    </nav>
+
+    <header class="pt-48 pb-24 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-luxury font-extrabold gold-gradient mb-8 uppercase tracking-tighter leading-tight">
+            Bâtissez votre patrimoine en Algérie
+        </h1>
+        <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-10 leading-relaxed">
+            Accompagnement exclusif pour la diaspora.<br>Sécurité juridique totale & Propriétés d'exception.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <div class="bg-gray-900/50 border border-gray-800 px-6 py-3 rounded-full text-[10px] uppercase tracking-widest text-yellow-600">
+                ✓ Acte & Livret Foncier
+            </div>
+            <div class="bg-gray-900/50 border border-gray-800 px-6 py-3 rounded-full text-[10px] uppercase tracking-widest text-yellow-600">
+                ✓ Visite Live WhatsApp
+            </div>
+        </div>
+    </header>
+
+    <main id="villas" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-6 pb-32">
+        </main>
+
+    <footer class="bg-[#050505] border-t border-gray-900 py-16 px-6 text-center">
+        <div class="font-luxury text-2xl gold-gradient mb-4">SNIPER IMMOBILIER</div>
+        <p class="text-gray-600 text-[10px] uppercase tracking-widest mb-8 italic">Votre relais de confiance sur le terrain algérien</p>
+        <p class="text-[9px] text-gray-800 uppercase tracking-widest">© 2026 Sniper Immobilier. Alger, Algérie.</p>
+    </footer>
+
     <script>
         async function fetchProperties() {
             const TOKEN = 'patQB6cx7rAbbVIPa.e0334cde62143cd92a859c28393adca0c1caad61034b39df50aaf4031c104941';
@@ -27,26 +55,28 @@
                     headers: { Authorization: `Bearer ${TOKEN}` }
                 });
                 const data = await response.json();
-                const grid = document.getElementById('grid');
+                const grid = document.getElementById('villas');
                 grid.innerHTML = data.records.map(record => {
                     const f = record.fields;
                     const photo = f.Photos && f.Photos[0] ? f.Photos[0].url : 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80';
                     return `
-                        <div class="bg-[#0f0f0f] rounded-sm overflow-hidden border border-gray-900 hover:border-yellow-700 transition-all duration-700 shadow-2xl group">
-                            <div class="overflow-hidden h-80">
-                                <img src="${photo}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
+                        <div class="bg-[#0a0a0a] border border-gray-900 group hover:border-yellow-900 transition-all duration-700">
+                            <div class="overflow-hidden h-[350px] relative">
+                                <img src="${photo}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000">
+                                <div class="absolute top-4 right-4 bg-black/80 border border-yellow-900 text-yellow-600 text-[8px] px-2 py-1 tracking-tighter uppercase">Dossier Vérifié</div>
                             </div>
-                            <div class="p-10 text-center">
-                                <h2 class="text-2xl font-luxury font-bold mb-3 text-white uppercase tracking-wider">${f.Nom || 'Propriété de Luxe'}</h2>
-                                <p class="text-yellow-600 text-xl font-bold mb-6 font-luxury">${f.Prix ? f.Prix.toLocaleString() : 'Sur demande'} €</p>
-                                <a href="https://wa.me/33634089609?text=Infos%20sur%20:${encodeURIComponent(f.Nom || 'Villa')}" 
-                                   target="_blank" class="block border border-yellow-800 text-yellow-600 hover:bg-yellow-700 hover:text-white font-bold py-4 px-4 transition-all tracking-[0.2em] text-[10px] uppercase">
-                                   Contacter le Concierge
+                            <div class="p-8 text-center">
+                                <h3 class="text-xl font-luxury mb-2 tracking-wide">${f.Nom || 'Propriété de Prestige'}</h3>
+                                <p class="text-yellow-600 font-bold mb-4 tracking-widest text-lg">${f.Prix ? f.Prix.toLocaleString() : 'Sur demande'} DZD</p>
+                                <div class="text-[9px] text-gray-500 uppercase tracking-widest mb-6 italic">Document : Acte & Livret Foncier</div>
+                                <a href="https://wa.me/33634089609?text=Demande d'expertise : ${encodeURIComponent(f.Nom || 'Villa')}" 
+                                   target="_blank" class="block w-full border border-yellow-900 py-4 text-[9px] uppercase tracking-[0.4em] font-bold hover:bg-yellow-900 hover:text-black transition-all">
+                                   Solliciter une visite live
                                 </a>
                             </div>
                         </div>`;
                 }).join('');
-            } catch (error) { console.error("Erreur Airtable:", error); }
+            } catch (e) { console.error(e); }
         }
         fetchProperties();
     </script>
