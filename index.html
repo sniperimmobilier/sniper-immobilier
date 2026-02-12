@@ -13,9 +13,9 @@
 </head>
 <body class="bg-black text-white p-4 font-sans">
     <div class="max-w-6xl mx-auto text-center py-20">
-        <h1 class="text-6xl md:text-8xl font-luxury font-extrabold gold-gradient mb-6 uppercase tracking-tighter">SNIPER IMMOBILIER</h1>
+        <h1 class="text-6xl md:text-8xl font-luxury font-extrabold gold-gradient mb-6 uppercase tracking-tighter text-center">SNIPER IMMOBILIER</h1>
         <div class="h-1 w-32 bg-yellow-600 mx-auto mb-6"></div>
-        <p class="text-gray-500 tracking-[0.3em] uppercase text-xs font-semibold">L'immobilier d'exception | Prestige & Excellence</p>
+        <p class="text-gray-500 tracking-[0.3em] uppercase text-[10px] font-semibold text-center italic">L'immobilier d'exception | Algérie & International</p>
     </div>
     <div id="grid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pb-24">
         </div>
@@ -34,14 +34,13 @@
                     return `
                         <div class="bg-[#0f0f0f] rounded-sm overflow-hidden border border-gray-900 hover:border-yellow-700 transition-all duration-700 shadow-2xl group">
                             <div class="overflow-hidden h-80">
-                                <img src="${photo}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700">
+                                <img src="${photo}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
                             </div>
-                            <div class="p-10">
-                                <h2 class="text-2xl font-luxury font-bold mb-3 text-white text-center">${f.Nom || 'Villa d\'Exception'}</h2>
-                                <p class="text-yellow-600 text-xl font-bold mb-6 font-luxury text-center">${f.Prix ? f.Prix.toLocaleString() : 'Sur demande'} €</p>
-                                <p class="text-gray-500 text-sm mb-10 leading-relaxed text-center h-12 overflow-hidden">${f.Description || ''}</p>
-                                <a href="https://wa.me/33634089609?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20:${encodeURIComponent(f.Nom || 'Villa')}" 
-                                   target="_blank" class="block border border-yellow-800 text-yellow-600 hover:bg-yellow-700 hover:text-white font-bold py-4 px-4 text-center transition-all tracking-[0.2em] text-[10px] uppercase">
+                            <div class="p-10 text-center">
+                                <h2 class="text-2xl font-luxury font-bold mb-3 text-white uppercase tracking-wider">${f.Nom || 'Propriété de Luxe'}</h2>
+                                <p class="text-yellow-600 text-xl font-bold mb-6 font-luxury">${f.Prix ? f.Prix.toLocaleString() : 'Sur demande'} €</p>
+                                <a href="https://wa.me/33634089609?text=Infos%20sur%20:${encodeURIComponent(f.Nom || 'Villa')}" 
+                                   target="_blank" class="block border border-yellow-800 text-yellow-600 hover:bg-yellow-700 hover:text-white font-bold py-4 px-4 transition-all tracking-[0.2em] text-[10px] uppercase">
                                    Contacter le Concierge
                                 </a>
                             </div>
@@ -52,4 +51,4 @@
         fetchProperties();
     </script>
 </body>
-</html>
+</html>''
